@@ -10,14 +10,14 @@
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"onCommand:gisa-gtk-3-project.helloWorld"
+		"onCommand:gisa-gtk-3-project.createproject"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "gisa-gtk-3-project.helloWorld",
-				"title": "Hello World"
+				"command": "gisa-gtk-3-project.createproject",
+				"title": "Create GTk+3 Project"
 			}
 		]
 	},
