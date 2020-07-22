@@ -3,11 +3,12 @@
 	"displayName": "Gisa Gtk+3 Project",
 	"description": "Create new Gtk+3 prject with C.",
 	"version": "0.0.1",
+	"publisher": "yogiastawan",
 	"engines": {
 		"vscode": "^1.47.0"
 	},
 	"categories": [
-		"Programming Languages"
+		"Other"
 	],
 	"activationEvents": [
 		"onCommand:gisa-gtk-3-project.createproject"
