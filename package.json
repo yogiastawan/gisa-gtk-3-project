@@ -4,6 +4,9 @@
 	"description": "Create new Gtk+3 prject with C.",
 	"version": "0.0.1",
 	"publisher": "yogiastawan",
+	"repository": {
+		"url": "https://gitlab.com/yogiastawan/gisa-gtk-3-project.git"
+	},
 	"engines": {
 		"vscode": "^1.47.0"
 	},
