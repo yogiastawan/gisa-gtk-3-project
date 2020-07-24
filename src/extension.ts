@@ -23,7 +23,10 @@ function createFolderStructureNewProject(nameProject:string){
 	}else{
 		var name=nameProject.replace(' ','');
 		fs.mkdirSync(currentDirectory+"/"+name+"/src",{recursive: true});
-		fs.mkdirSync(currentDirectory+"/"+name+"/res",{recursive:true});
+		fs.mkdirSync(currentDirectory+"/"+name+"/res/ui",{recursive:true});
+		fs.mkdirSync(currentDirectory+"/"+name+"/res/menu",{recursive:true});
+		fs.mkdirSync(currentDirectory+"/"+name+"/res/drawable",{recursive:true});
+		fs.mkdirSync(currentDirectory+"/"+name+"/res/drawable-vector",{recursive:true});
 		return true;
 	}	
 }
@@ -36,7 +39,7 @@ function createFileNewProject(nameProject:string) {
 	var content=createCContent(nameProject);
 	fs.writeFileSync(currentDirectory+"/"+nameDir+"/src/"+name+".c",content);
 	content=createWindowUIContent(nameProject);
-	fs.writeFileSync(currentDirectory+"/"+nameDir+"/res/"+name+".ui",content);
+	fs.writeFileSync(currentDirectory+"/"+nameDir+"/res/ui/"+name+".ui",content);
 }
 
 //create c content
