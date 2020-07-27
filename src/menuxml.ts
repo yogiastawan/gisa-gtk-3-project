@@ -1,4 +1,4 @@
-export function menuxml() {
+export function menuxmlcontent() {
     var cont: string;
     cont = "<?xml version=\"1.0\"?>\n" +
         "<interface>\n" +
@@ -62,7 +62,6 @@ export function menuxml() {
         "\t\t\t</section>\n" +
         "\t\t</submenu>\n" +
         "\t</menu>\n\n" +
-
         "\t<menu id=\"appmenu\">\n" +
         "\t\t<section>\n" +
         "\t\t\t<item>\n" +
