@@ -7,7 +7,7 @@
 
 <div align="center">
 
-![Demo](/gisa-gtk-3-demo.gif)
+![Demo](https://gitlab.com/yogiastawan/gisa-gtk-3-project/-/raw/master/gisa-gtk-3-demo.gif)
 
 </div>
 
