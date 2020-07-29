@@ -7,7 +7,7 @@
 
 <div align="center">
 
-![Demo] (/gisa-gtk-3-demo.gif)
+![Demo](/gisa-gtk-3-demo.gif)
 
 </div>
 
