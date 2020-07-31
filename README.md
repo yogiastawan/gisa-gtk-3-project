@@ -7,16 +7,15 @@
 
 <div align="center">
 
-![Demo](https://gitlab.com/yogiastawan/gisa-gtk-3-project/-/raw/master/gisa-gtk-3-demo.gif)
-
 </div>
 
 ---
 
 # Description
 Visual Studio Code extension to easily create gtk + 3 projects with **C** language. Run **ctrl+shift+P** and select **Create Gtk+3 Project**.
+![Demo](https://gitlab.com/yogiastawan/gisa-gtk-3-project/-/raw/master/gisa-gtk-3-demo.gif)
 
-## Features
+# Features
 features in gisa-gtk3-project extensions includes: 
 * auto create project structure
     * *src* : contains c source code of project.
@@ -27,7 +26,7 @@ features in gisa-gtk3-project extensions includes:
 * auto create source code like: *c* file, *menu* file, *window ui* file, and *resource* file.
 
 
-## Requirements
+# Requirements
 make sure you install all libraries to compile and run gtk+3 projects, including:
 * gtk3-devel
 * gstreamer-devel
