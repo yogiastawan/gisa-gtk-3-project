@@ -15,7 +15,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:gisa-gtk-3-project.createproject"
+		"onCommand:gisa-gtk-3-project.createproject",
+		"onCommand:gisa-gtk-3-project.createcustomwidget"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -23,6 +24,10 @@
 			{
 				"command": "gisa-gtk-3-project.createproject",
 				"title": "Create GTk+3 Project"
+			},
+			{
+				"command": "gisa-gtk-3-project.createcustomwidget",
+				"title": "Create GTK+3 Custom Widget"
 			}
 		]
 	},
