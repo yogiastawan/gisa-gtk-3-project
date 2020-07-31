@@ -7,6 +7,7 @@ import * as windowContentxml from "./windowxml";
 import * as mainC from "./mainc";
 import * as makefileCreator from "./makefile";
 import * as gResource from "./res";
+import * as customWidgetContent from "./customwidget";
 
 //create name input
 function createNameInput() {
