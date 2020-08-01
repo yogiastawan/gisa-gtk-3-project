@@ -65,6 +65,15 @@ function createFileNewProjectWithUI(nameProject: string) {
 	fs.writeFileSync(currentDirectory + "/" + nameDir + "/res/resource.mk", content);
 }
 
+//new custom_widget
+function createNameWidget() {
+	var option: vscode.InputBoxOptions = {
+		ignoreFocusOut: false,
+		placeHolder: "Input here your widget name...",
+		prompt: "Type here your widget name."
+	};
+	return vscode.window.showInputBox(option);
+}
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
