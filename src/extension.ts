@@ -28,11 +28,11 @@ function createFolderStructureNewProject(nameProject: string) {
 		return false;
 	} else {
 		var name = nameProject.replace(/ /g , "");
-		fs.mkdirSync(currentDirectory + "/" + name + "/src", { recursive: true });
-		fs.mkdirSync(currentDirectory + "/" + name + "/res/ui", { recursive: true });
-		fs.mkdirSync(currentDirectory + "/" + name + "/res/menu", { recursive: true });
-		fs.mkdirSync(currentDirectory + "/" + name + "/res/drawable", { recursive: true });
-		fs.mkdirSync(currentDirectory + "/" + name + "/res/drawable-vector", { recursive: true });
+		fs.mkdirSync(`${currentDirectory}/${name}/src`, { recursive: true });
+		fs.mkdirSync(`${currentDirectory}/${name}/res/ui`, { recursive: true });
+		fs.mkdirSync(`${currentDirectory}/${name}/res/menu`, { recursive: true });
+		fs.mkdirSync(`${currentDirectory}/${name}/res/drawable`, { recursive: true });
+		fs.mkdirSync(`${currentDirectory}/${name}/res/drawable-vector`, { recursive: true });
 		return true;
 	}
 }
@@ -44,25 +44,25 @@ function createFileNewProjectWithUI(nameProject: string) {
 	var nameDir = nameProject.replace(/ /g, '');
 	//create main c file
 	var content = mainC.mainWithUI(nameProject);
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/src/main_" + name + ".c", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/src/main_${name}.c`, content);
 	//create ui window file
 	content = windowContentxml.createWindowContent(nameProject);
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/res/ui/" + name + ".ui", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/ui/${name}.ui`, content);
 	//create menu.ui file
 	content = menuContentxml.menuxmlcontent();
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/res/menu/menu.ui", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/menu/menu.ui`, content);
 	//create resource file
 	content=gResource.contentRes(nameProject);
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/res/res_"+nameDir+".gresource.xml", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/res_${nameDir}.gresource.xml`, content);
 	//create Makefile project	
 	content=makefileCreator.contentMakeFileProject(nameProject);
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/Makefile", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/Makefile`, content);
 	//create Makefile src project	
 	content=makefileCreator.contentMakeFileSrc(nameProject);
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/src/source.mk", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/src/source.mk`, content);
 	//create Makefile res project	
 	content=makefileCreator.contentMakeFileRes(nameProject);
-	fs.writeFileSync(currentDirectory + "/" + nameDir + "/res/resource.mk", content);
+	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/resource.mk`, content);
 }
 
 //new custom_widget
