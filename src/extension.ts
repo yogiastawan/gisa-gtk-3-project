@@ -8,6 +8,7 @@ import * as mainC from "./mainc";
 import * as makefileCreator from "./makefile";
 import * as gResource from "./res";
 import * as customWidgetContent from "./customwidget";
+import { fileURLToPath } from 'url';
 
 //create name input
 function createNameInput() {
@@ -21,48 +22,55 @@ function createNameInput() {
 
 //create folder structure
 function createFolderStructureNewProject(nameProject: string) {
-	var currentDirectory = vscode.workspace.rootPath;
-	console.log(currentDirectory);
-	if (currentDirectory === null) {
+	var workspaces: ReadonlyArray<vscode.WorkspaceFolder> | undefined;
+	workspaces = vscode.workspace.workspaceFolders;
+	if (workspaces) {
+		var name = nameProject.replace(/ /g, "");
+		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/src`, { recursive: true });
+		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/ui`, { recursive: true });
+		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/menu`, { recursive: true });
+		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/drawable`, { recursive: true });
+		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/drawable-vector`, { recursive: true });
+		return true;
+	} else {
 		vscode.window.showErrorMessage("Cannot Create Project. Please open folder first.");
 		return false;
-	} else {
-		var name = nameProject.replace(/ /g , "");
-		fs.mkdirSync(`${currentDirectory}/${name}/src`, { recursive: true });
-		fs.mkdirSync(`${currentDirectory}/${name}/res/ui`, { recursive: true });
-		fs.mkdirSync(`${currentDirectory}/${name}/res/menu`, { recursive: true });
-		fs.mkdirSync(`${currentDirectory}/${name}/res/drawable`, { recursive: true });
-		fs.mkdirSync(`${currentDirectory}/${name}/res/drawable-vector`, { recursive: true });
-		return true;
 	}
 }
 
 //create file project
 function createFileNewProjectWithUI(nameProject: string) {
-	var currentDirectory = vscode.workspace.rootPath;
-	var name = nameProject.replace(/ /g, '_').toLowerCase();
-	var nameDir = nameProject.replace(/ /g, '');
-	//create main c file
-	var content = mainC.mainWithUI(nameProject);
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/src/main_${name}.c`, content);
-	//create ui window file
-	content = windowContentxml.createWindowContent(nameProject);
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/ui/${name}.ui`, content);
-	//create menu.ui file
-	content = menuContentxml.menuxmlcontent();
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/menu/menu.ui`, content);
-	//create resource file
-	content=gResource.contentRes(nameProject);
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/res_${nameDir}.gresource.xml`, content);
-	//create Makefile project	
-	content=makefileCreator.contentMakeFileProject(nameProject);
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/Makefile`, content);
-	//create Makefile src project	
-	content=makefileCreator.contentMakeFileSrc(nameProject);
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/src/source.mk`, content);
-	//create Makefile res project	
-	content=makefileCreator.contentMakeFileRes(nameProject);
-	fs.writeFileSync(`${currentDirectory}/${nameDir}/res/resource.mk`, content);
+	var workspaces: ReadonlyArray<vscode.WorkspaceFolder> | undefined;
+	workspaces = vscode.workspace.workspaceFolders;
+	if (workspaces) {
+		var name = nameProject.replace(/ /g, '_').toLowerCase();
+		var nameDir = nameProject.replace(/ /g, '');
+		//create main c file
+		var content = mainC.mainWithUI(nameProject);
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/src/main_${name}.c`, content);
+		//create ui window file
+		content = windowContentxml.createWindowContent(nameProject);
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/res/ui/${name}.ui`, content);
+		//create menu.ui file
+		content = menuContentxml.menuxmlcontent();
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/res/menu/menu.ui`, content);
+		//create resource file
+		content = gResource.contentRes(nameProject);
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/res/res_${nameDir}.gresource.xml`, content);
+		//create Makefile project	
+		content = makefileCreator.contentMakeFileProject(nameProject);
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/Makefile`, content);
+		//create Makefile src project	
+		content = makefileCreator.contentMakeFileSrc(nameProject);
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/src/source.mk`, content);
+		//create Makefile res project	
+		content = makefileCreator.contentMakeFileRes(nameProject);
+		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/res/resource.mk`, content);
+		vscode.commands.executeCommand('vscode.openFolder',vscode.Uri.file(`${workspaces[0].uri.path}/${nameDir}`));
+		
+	} else {
+		vscode.window.showErrorMessage("Cannot Create File to Project");
+	}
 }
 
 //new custom_widget
@@ -76,25 +84,31 @@ function createNameWidget() {
 }
 
 function createFolderCustomWidget() {
-	var currentDirectory = vscode.workspace.rootPath;
-	console.log(currentDirectory);
-	if (currentDirectory === null) {
+	var workspaces: ReadonlyArray<vscode.WorkspaceFolder> | undefined;
+	workspaces = vscode.workspace.workspaceFolders;
+	if (workspaces) {
+		fs.mkdirSync(`${workspaces[0].uri.path}/src/customWidget`, { recursive: true });
+		return true;
+	} else {
 		vscode.window.showErrorMessage("Cannot Create Custom Widget. Please open folder first.");
 		return false;
-	} else {		
-		fs.mkdirSync(`${currentDirectory}/src/customWidget`, { recursive: true });		
-		return true;
 	}
 }
 
 function createFileNewCustomWidget(nameWidget: string) {
-	var currentDirectory = vscode.workspace.rootPath;	
-	var name = nameWidget.replace(/ /g, '');
-	//create main c file
-	var content = customWidgetContent.customWidgetHeader(nameWidget);
-	fs.writeFileSync(`${currentDirectory}/src/${name}.h`, content);
-	var content = customWidgetContent.customWidgetCFile(nameWidget);
-	fs.writeFileSync(`${currentDirectory}/src/${name}.c`, content);
+	var workspaces: ReadonlyArray<vscode.WorkspaceFolder> | undefined;
+	workspaces = vscode.workspace.workspaceFolders;
+	if (workspaces) {
+		var name = nameWidget.replace(/ /g, '');
+		var headDir = `${workspaces[0].uri.path}/src/${name}.h`;
+		var cDir = `${workspaces[0].uri.path}/src/${name}.c`;
+		//create widget file
+		var content = customWidgetContent.customWidgetHeader(nameWidget);
+		fs.writeFileSync(`${headDir}`, content);
+		var content = customWidgetContent.customWidgetCFile(nameWidget);
+		fs.writeFileSync(`${cDir}`, content);
+	}
+
 }
 
 // this method is called when your extension is activated
@@ -112,26 +126,39 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Gisa Gtk+3 Project!');
+		// vscode.window.showInformationMessage('Hello World from Gisa Gtk+3 Project!');
 		let name = createNameInput().then(async function (res) {
 			if (!res) {
 				vscode.window.showErrorMessage("Cannot create project");
 			} else {
-				console.log("input: " + res);
+				// console.log("input: " + res);
 				//create folder
 				var folderSuccess = createFolderStructureNewProject(res);
 				if (!folderSuccess) {
 					vscode.window.showErrorMessage("Cannot create project: Create base folder failed.");
 				} else {
 					//create file
-					createFileNewProjectWithUI(res);
+					createFileNewProjectWithUI(res);					
 				}
 			}
 		});
 
 	});
 
-	let disposable2=vscode.commands.registerCommand('gisa-gtk-3-project.createcustomwidget',()=>{
+	let disposable2 = vscode.commands.registerCommand('gisa-gtk-3-project.createcustomwidget', () => {
+		let name = createNameWidget().then(async function (res) {
+			if (!res) {
+				vscode.window.showErrorMessage("Cannot create Custom Widget");
+			} else {
+				console.log("input: " + res);
+				var folderSuccess = createFolderCustomWidget();
+				if (!folderSuccess) {
+					vscode.window.showErrorMessage("Cannot create widget: Create folder failed.");
+				} else {
+					createFileNewCustomWidget(res);
+				}
+			}
+		});
 
 	});
 
