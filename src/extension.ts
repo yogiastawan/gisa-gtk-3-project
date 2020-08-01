@@ -74,6 +74,20 @@ function createNameWidget() {
 	};
 	return vscode.window.showInputBox(option);
 }
+
+function createFolderCustomWidget(nameProject: string) {
+	var currentDirectory = vscode.workspace.rootPath;
+	console.log(currentDirectory);
+	if (currentDirectory === null) {
+		vscode.window.showErrorMessage("Cannot Create Project. Please open folder first.");
+		return false;
+	} else {
+		var name = nameProject.replace(/ /g , "");
+		fs.mkdirSync(`${currentDirectory}/${name}/src/customWidget`, { recursive: true });		
+		return true;
+	}
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
