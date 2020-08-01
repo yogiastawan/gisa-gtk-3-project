@@ -30,7 +30,7 @@ CFLAGS= -Wall -Werror -Wextra -v -std=c99
 DBGCFLAGS= -g
 
 GTKFLAGS=\`pkg-config --cflags --libs gtk+-3.0\`
-SRC = $(wildcard *.c)
+SRC = $(wildcard *.c) $(wildcard */*.c)
 OBJ = $(SRC:.c=.o)
 EXEC= ${nameFile}
 
