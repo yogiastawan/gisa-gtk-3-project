@@ -14,7 +14,7 @@
 # Description
 Visual Studio Code extension to easily create gtk + 3 projects with **C** language. Run **ctrl+shift+P** and select **Create Gtk+3 Project**.
 
-![Demo](https://github.com/yogiastawan/gisa-gtk-3-project/blob/master/gisa-gtk-3-demo.gif)
+![Demo](https://gitlab.com/yogiastawan/gisa-gtk-3-project/-/raw/master/gisa-gtk-3-demo.gif)
 
 # Features
 features in gisa-gtk3-project extensions includes: 
