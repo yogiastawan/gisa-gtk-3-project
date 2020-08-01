@@ -75,17 +75,26 @@ function createNameWidget() {
 	return vscode.window.showInputBox(option);
 }
 
-function createFolderCustomWidget(nameProject: string) {
+function createFolderCustomWidget() {
 	var currentDirectory = vscode.workspace.rootPath;
 	console.log(currentDirectory);
 	if (currentDirectory === null) {
-		vscode.window.showErrorMessage("Cannot Create Project. Please open folder first.");
+		vscode.window.showErrorMessage("Cannot Create Custom Widget. Please open folder first.");
 		return false;
-	} else {
-		var name = nameProject.replace(/ /g , "");
-		fs.mkdirSync(`${currentDirectory}/${name}/src/customWidget`, { recursive: true });		
+	} else {		
+		fs.mkdirSync(`${currentDirectory}/src/customWidget`, { recursive: true });		
 		return true;
 	}
+}
+
+function createFileNewCustomWidget(nameWidget: string) {
+	var currentDirectory = vscode.workspace.rootPath;	
+	var name = nameWidget.replace(/ /g, '');
+	//create main c file
+	var content = customWidgetContent.customWidgetHeader(nameWidget);
+	fs.writeFileSync(`${currentDirectory}/src/${name}.h`, content);
+	var content = customWidgetContent.customWidgetCFile(nameWidget);
+	fs.writeFileSync(`${currentDirectory}/src/${name}.c`, content);
 }
 
 // this method is called when your extension is activated
@@ -127,6 +136,7 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable2);
 }
 
 // this method is called when your extension is deactivated
