@@ -15,19 +15,24 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:gisa-gtk-3-project.createproject",
-		"onCommand:gisa-gtk-3-project.createcustomwidget"
+		"onCommand:gisa-gtk-3-project.createprojectwithUI",
+		"onCommand:gisa-gtk-3-project.createcustomwidget",
+		"onCommand:gisa-gtk-3-project.createproject"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "gisa-gtk-3-project.createproject",
-				"title": "Create GTk+3 Project"
+				"command": "gisa-gtk-3-project.createprojectwithUI",
+				"title": "Create GTk+3 Project with xml UI"
 			},
 			{
 				"command": "gisa-gtk-3-project.createcustomwidget",
 				"title": "Create GTK+3 Custom Widget"
+			},
+			{
+				"command": "gisa-gtk-3-project.createproject",
+				"title": "Create GTk+3 Project (No xml UI file)"
 			}
 		]
 	},
