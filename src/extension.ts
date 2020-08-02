@@ -99,9 +99,9 @@ function createFileNewCustomWidget(nameWidget: string) {
 	var workspaces: ReadonlyArray<vscode.WorkspaceFolder> | undefined;
 	workspaces = vscode.workspace.workspaceFolders;
 	if (workspaces) {
-		var name = nameWidget.replace(/ /g, '');
-		var headDir = `${workspaces[0].uri.path}/src/${name}.h`;
-		var cDir = `${workspaces[0].uri.path}/src/${name}.c`;
+		var name = nameWidget.replace(/ /g, '').toLowerCase();
+		var headDir = `${workspaces[0].uri.path}/src/customWidget/${name}.h`;
+		var cDir = `${workspaces[0].uri.path}/src/customWidget/${name}.c`;
 		//create widget file
 		var content = customWidgetContent.customWidgetHeader(nameWidget);
 		fs.writeFileSync(`${headDir}`, content);
