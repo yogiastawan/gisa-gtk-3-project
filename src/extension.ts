@@ -79,7 +79,7 @@ function createFileNewProject(nameProject: string) {
 		var name = nameProject.replace(/ /g, '_').toLowerCase();
 		var nameDir = nameProject.replace(/ /g, '');
 		//create main c file
-		var content = mainC.mainWithUI(nameProject);
+		var content = mainC.mainWithoutUI(nameProject);
 		fs.writeFileSync(`${workspaces[0].uri.path}/${nameDir}/src/main_${name}.c`, content);		
 		//create Makefile project	
 		content = makefileCreator.contentMakeFileProjetPureC(nameProject);
