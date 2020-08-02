@@ -2,7 +2,7 @@
 	"name": "gisa-gtk-3-project",
 	"displayName": "Gisa Gtk+3 Project",
 	"description": "Create new Gtk+3 prject with C.",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"publisher": "yogiastawan",
 	"icon": "icon/icon.png",
 	"repository": {
