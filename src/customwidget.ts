@@ -252,7 +252,7 @@ export function customWidgetCFile(nameWidget:string) {
     }
     
     void ${fname}_set_value(${widgetName} *widget, gdouble value){
-        g_return_if_fail(${firstName}_IS_${secondName}(widget));
+        g_return_if_fail(${firstName}IS_${secondName}(widget));
         widget->priv->value=value;
         gtk_widget_queue_draw(GTK_WIDGET(widget));
     }`;
