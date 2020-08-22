@@ -30,6 +30,7 @@ function createFolderStructureNewProject(nameProject: string) {
 		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/menu`, { recursive: true });
 		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/drawable`, { recursive: true });
 		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/drawable-vector`, { recursive: true });
+		fs.mkdirSync(`${workspaces[0].uri.path}/${name}/res/style`, { recursive: true });
 		return true;
 	} else {
 		vscode.window.showErrorMessage("Cannot Create Project. Please open folder first.");
